@@ -3,7 +3,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Addstudent from './Addstudent'
 
-const View = () => {
+const ViewStudents = () => {
     var[update,setupdate]=useState(false)
     var[selected,setselected]=useState([])
     var[students,setstudents]=useState([])
@@ -17,7 +17,8 @@ const View = () => {
         .catch(error=>console.log(error))
     },[])
 
-    const DeleteValue=(id)=>{
+
+const DeleteValue=(id)=>{
 console.log(id)
 axios.delete("http://localhost:3000/students/"+id)
 .then(response=>{
@@ -28,6 +29,7 @@ axios.delete("http://localhost:3000/students/"+id)
     }
 
 const updateValue=(value)=>{
+    console.log("update")
         setselected(value)
         setupdate(true)
     }
@@ -48,7 +50,7 @@ const updateValue=(value)=>{
                     <TableCell>{values.grade}</TableCell>
                     <TableCell><button onClick={()=>DeleteValue(values.id)}>DELETE</button></TableCell>
                     <TableCell>
-                        <button onclick={()=>updateValue(values)}>UPDATE</button>
+                        <button onClick={()=>updateValue(values)}>UPDATE</button>
                     </TableCell>
                 </TableRow>
             })}
@@ -67,4 +69,4 @@ const updateValue=(value)=>{
   )
 }
 
-export default View
+export default ViewStudents
